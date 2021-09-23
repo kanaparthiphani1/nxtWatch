@@ -1,4 +1,5 @@
 import {Component} from 'react'
+import Cookies from 'js-cookie'
 import {
   LoginOuterContainer,
   LoginContainer,
@@ -13,11 +14,18 @@ import {
   CheckBox,
   CheckBoxLabel,
   Button,
+  ErrorMsg,
 } from './styledComponents'
 
 class Login extends Component {
   state = {
+    username: '',
+    password: '',
+    usernameValid: true,
+    passwordValid: true,
     showPassword: false,
+    showSubmitError: false,
+    errorMsg: '',
   }
 
   getInputType = () => {
@@ -34,7 +42,67 @@ class Login extends Component {
     }))
   }
 
+  onUsernameChange = event => {
+    this.setState({username: event.target.value, usernameValid: true})
+  }
+
+  onPasswordChange = event => {
+    this.setState({password: event.target.value, passwordValid: true})
+  }
+
+  onSubmitSuccess = jwtToken => {
+    const {history} = this.props
+
+    Cookies.set('jwt_token', jwtToken, {
+      expires: 30,
+      path: '/',
+    })
+    history.replace('/')
+  }
+
+  onSubmitFailure = errorMsg => {
+    this.setState({showSubmitError: true, errorMsg})
+  }
+
+  loginHandler = async () => {
+    const {username, password} = this.state
+    const userDetails = {username, password}
+    const url = 'https://apis.ccbp.in/login'
+    const options = {
+      method: 'POST',
+      body: JSON.stringify(userDetails),
+    }
+
+    const response = await fetch(url, options)
+    const jsonData = await response.json()
+    if (response.ok) {
+      this.onSubmitSuccess(jsonData.jwt_token)
+    } else {
+      this.onSubmitFailure(jsonData.error_msg)
+    }
+  }
+
+  onFormSubmit = event => {
+    const {username, password} = this.state
+    event.preventDefault()
+    if (username === '') {
+      this.setState({usernameValid: false})
+    }
+    if (password === '') {
+      this.setState({passwordValid: false})
+    }
+    this.loginHandler()
+  }
+
   render() {
+    const {
+      username,
+      password,
+      usernameValid,
+      passwordValid,
+      showSubmitError,
+      errorMsg,
+    } = this.state
     const ele = (
       <LoginOuterContainer>
         <LoginContainer>
@@ -42,10 +110,17 @@ class Login extends Component {
             <Image src="https://assets.ccbp.in/frontend/react-js/nxt-watch-logo-light-theme-img.png" />
           </ImageContainer>
           <FormContainer>
-            <Form>
+            <Form onSubmit={this.onFormSubmit}>
               <FormElement>
                 <Label htmlFor="username">USERNAME</Label>
-                <Input id="username" type="text" placeholder="Username" />
+                <Input
+                  value={username}
+                  id="username"
+                  type="text"
+                  placeholder="Username"
+                  onChange={this.onUsernameChange}
+                  validColor={usernameValid}
+                />
               </FormElement>
               <FormElement>
                 <Label htmlFor="password">PASSWORD</Label>
@@ -53,6 +128,9 @@ class Login extends Component {
                   id="password"
                   type={this.getInputType()}
                   placeholder="Password"
+                  value={password}
+                  onChange={this.onPasswordChange}
+                  validColor={passwordValid}
                 />
               </FormElement>
               <CheckBoxCont>
@@ -66,7 +144,8 @@ class Login extends Component {
                 </CheckBoxLabel>
               </CheckBoxCont>
 
-              <Button type="button">Submit</Button>
+              <Button type="submit">Submit</Button>
+              {showSubmitError && <ErrorMsg>* {errorMsg}</ErrorMsg>}
             </Form>
           </FormContainer>
         </LoginContainer>

@@ -1,8 +1,19 @@
 import {Component} from 'react'
+import {HomeContainer, SideBarConatiner} from './styledComponents'
+import Header from '../Header'
+import SideBar from '../Sidebar'
 
 class Home extends Component {
   render() {
-    return <h1>Home</h1>
+    const ele = (
+      <HomeContainer>
+        <Header />
+        <SideBarConatiner>
+          <SideBar />
+        </SideBarConatiner>
+      </HomeContainer>
+    )
+    return ele
   }
 }
 

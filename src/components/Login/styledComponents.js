@@ -48,9 +48,10 @@ export const Label = styled.label`
 
 export const Input = styled.input`
   padding: 8px;
-  border: 1px solid #94a3b8;
+  border-width: ${props => (props.validColor === true ? '1px' : '1.8px')};
+  border-color: ${props => (props.validColor === true ? '#475569' : 'red')};
+  border-radius: 5px;
   outline-style: none;
-  border-radius: 4px;
 `
 
 export const CheckBoxCont = styled.div`
@@ -71,4 +72,13 @@ export const Button = styled.button`
   border-radius: 10px;
   border: 0px;
   margin-top: 27px;
+`
+export const ErrorMsg = styled.p`
+  align-self: start;
+  font-size: 20px;
+  margin-top: 3px;
+  margin-bottom: 0px;
+  font-family: 'Roboto';
+  font-size: 12px;
+  color: #ff0b37;
 `
