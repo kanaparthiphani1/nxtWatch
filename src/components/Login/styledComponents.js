@@ -5,6 +5,7 @@ export const LoginOuterContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: ${props => (props.isDark ? '#212121' : 'transparent')};
 `
 
 export const LoginContainer = styled.div`
@@ -12,7 +13,9 @@ export const LoginContainer = styled.div`
   flex-direction: column;
   padding: 37px;
   border-radius: 4px;
-  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  background-color: ${props => (props.isDark ? '#0f0f0f' : 'transparent')};
+  box-shadow: ${props =>
+    props.isDark ? '#0f0f0f' : 'rgba(100, 100, 111, 0.2) 0px 7px 29px 0px'};
 `
 
 export const ImageContainer = styled.div`
@@ -41,17 +44,21 @@ export const Form = styled.form`
   width: 100%;
 `
 export const Label = styled.label`
-  color: #475569;
+  color: ${props => (props.isDark ? 'white' : '#475569')};
+
   font-size: 11px;
   margin-bottom: 7px;
 `
 
 export const Input = styled.input`
   padding: 8px;
+  border-style: solid;
   border-width: ${props => (props.validColor === true ? '1px' : '1.8px')};
   border-color: ${props => (props.validColor === true ? '#475569' : 'red')};
   border-radius: 5px;
+  background-color: transparent;
   outline-style: none;
+  color: ${props => (props.isDark ? 'white' : 'black')};
 `
 
 export const CheckBoxCont = styled.div`
@@ -63,6 +70,8 @@ export const CheckBox = styled.input``
 export const CheckBoxLabel = styled.label`
   font-weight: 700;
   font-size: 12px;
+  margin-left: 5px;
+  color: ${props => (props.isDark ? 'white' : 'black')};
 `
 
 export const Button = styled.button`

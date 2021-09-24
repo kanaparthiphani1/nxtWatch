@@ -1,5 +1,6 @@
 import {Component} from 'react'
 import Cookies from 'js-cookie'
+import NxtWatchContext from '../../context/nxtWatchContext'
 import {
   LoginOuterContainer,
   LoginContainer,
@@ -95,64 +96,85 @@ class Login extends Component {
   }
 
   render() {
-    const {
-      username,
-      password,
-      usernameValid,
-      passwordValid,
-      showSubmitError,
-      errorMsg,
-    } = this.state
-    const ele = (
-      <LoginOuterContainer>
-        <LoginContainer>
-          <ImageContainer>
-            <Image src="https://assets.ccbp.in/frontend/react-js/nxt-watch-logo-light-theme-img.png" />
-          </ImageContainer>
-          <FormContainer>
-            <Form onSubmit={this.onFormSubmit}>
-              <FormElement>
-                <Label htmlFor="username">USERNAME</Label>
-                <Input
-                  value={username}
-                  id="username"
-                  type="text"
-                  placeholder="Username"
-                  onChange={this.onUsernameChange}
-                  validColor={usernameValid}
-                />
-              </FormElement>
-              <FormElement>
-                <Label htmlFor="password">PASSWORD</Label>
-                <Input
-                  id="password"
-                  type={this.getInputType()}
-                  placeholder="Password"
-                  value={password}
-                  onChange={this.onPasswordChange}
-                  validColor={passwordValid}
-                />
-              </FormElement>
-              <CheckBoxCont>
-                <CheckBox
-                  onChange={this.changeInputType}
-                  id="showPassword"
-                  type="checkbox"
-                />
-                <CheckBoxLabel htmlFor="showPassword">
-                  Show Password
-                </CheckBoxLabel>
-              </CheckBoxCont>
+    return (
+      <NxtWatchContext.Consumer>
+        {value => {
+          const {
+            username,
+            password,
+            usernameValid,
+            passwordValid,
+            showSubmitError,
+            errorMsg,
+          } = this.state
+          const ele = (
+            <LoginOuterContainer isDark={value.isDarkTheme}>
+              <LoginContainer isDark={value.isDarkTheme}>
+                <ImageContainer>
+                  <Image
+                    src={
+                      !value.isDarkTheme
+                        ? 'https://assets.ccbp.in/frontend/react-js/nxt-watch-logo-light-theme-img.png'
+                        : 'https://assets.ccbp.in/frontend/react-js/nxt-watch-logo-dark-theme-img.png'
+                    }
+                  />
+                </ImageContainer>
+                <FormContainer>
+                  <Form onSubmit={this.onFormSubmit}>
+                    <FormElement>
+                      <Label isDark={value.isDarkTheme} htmlFor="username">
+                        USERNAME
+                      </Label>
+                      <Input
+                        isDark={value.isDarkTheme}
+                        value={username}
+                        id="username"
+                        type="text"
+                        placeholder="Username"
+                        onChange={this.onUsernameChange}
+                        validColor={usernameValid}
+                      />
+                    </FormElement>
+                    <FormElement>
+                      <Label isDark={value.isDarkTheme} htmlFor="password">
+                        PASSWORD
+                      </Label>
+                      <Input
+                        isDark={value.isDarkTheme}
+                        id="password"
+                        type={this.getInputType()}
+                        placeholder="Password"
+                        value={password}
+                        onChange={this.onPasswordChange}
+                        validColor={passwordValid}
+                      />
+                    </FormElement>
+                    <CheckBoxCont>
+                      <CheckBox
+                        onChange={this.changeInputType}
+                        id="showPassword"
+                        type="checkbox"
+                      />
+                      <CheckBoxLabel
+                        isDark={value.isDarkTheme}
+                        htmlFor="showPassword"
+                      >
+                        Show Password
+                      </CheckBoxLabel>
+                    </CheckBoxCont>
 
-              <Button type="submit">Submit</Button>
-              {showSubmitError && <ErrorMsg>* {errorMsg}</ErrorMsg>}
-            </Form>
-          </FormContainer>
-        </LoginContainer>
-      </LoginOuterContainer>
+                    <Button type="submit">Login</Button>
+                    {showSubmitError && <ErrorMsg>* {errorMsg}</ErrorMsg>}
+                  </Form>
+                </FormContainer>
+              </LoginContainer>
+            </LoginOuterContainer>
+          )
+
+          return ele
+        }}
+      </NxtWatchContext.Consumer>
     )
-
-    return ele
   }
 }
 

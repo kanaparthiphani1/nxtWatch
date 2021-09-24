@@ -19,7 +19,7 @@ class App extends Component {
     const {isDarkTheme} = this.state
     return (
       <NxtWatchContext.Provider
-        data={{
+        value={{
           isDarkTheme,
           toggleDark: this.toggleDark,
         }}

@@ -1,5 +1,62 @@
 import styled from 'styled-components'
 import {Link} from 'react-router-dom'
+import {BsFillHouseDoorFill} from 'react-icons/bs'
+import {FaFire, FaGamepad} from 'react-icons/fa'
+import {MdPlaylistAdd} from 'react-icons/md'
+
+export const HomeIcon = styled(BsFillHouseDoorFill)`
+  margin-right: 10px;
+  font-size: 18px;
+  color: ${props => {
+    if (props.highlight) {
+      return '#ff0b37'
+    }
+    if (!props.highlight && props.isDark) {
+      return '#d7dfe9'
+    }
+    return 'black'
+  }};
+`
+export const TrendingIcon = styled(FaFire)`
+  margin-right: 10px;
+  font-size: 18px;
+  color: ${props => {
+    if (props.highlight) {
+      return '#ff0b37'
+    }
+    if (!props.highlight && props.isDark) {
+      return '#d7dfe9'
+    }
+    return 'black'
+  }};
+`
+export const GamingIcon = styled(FaGamepad)`
+  margin-right: 10px;
+  font-size: 18px;
+  color: ${props => {
+    if (props.highlight) {
+      return '#ff0b37'
+    }
+    if (!props.highlight && props.isDark) {
+      return '#d7dfe9'
+    }
+    return 'black'
+  }};
+`
+export const SavedIcon = styled(MdPlaylistAdd)`
+  margin-right: 10px;
+  font-size: 18px;
+  color: ${props => {
+    if (props.highlight) {
+      console.log('higlet')
+      return '#ff0b37'
+    }
+    if (!props.highlight && props.isDark) {
+      return '#d7dfe9'
+    }
+    return 'black'
+  }};
+`
 
 export const SideBarOuterCont = styled.div`
   display: flex;
@@ -7,6 +64,7 @@ export const SideBarOuterCont = styled.div`
   justify-content: space-between;
   min-height: 91vh;
   padding-top: 15px;
+  background-color: ${props => (props.isDark ? '#23231d' : 'white')};
 `
 
 export const SocialContainer = styled.div`
@@ -23,14 +81,14 @@ export const Desc1 = styled.h1`
   font-family: 'Roboto';
   font-size: 15px;
   margin: 10px;
-  color: black;
+  color: ${props => (props.isDark ? 'white' : 'black')};
 `
 
 export const Desc2 = styled.p`
   font-family: 'Roboto';
   font-size: 13px;
   margin: 10px;
-  color: #475569;
+  color: ${props => (props.isDark ? 'white' : '#475569')};
 `
 export const LogosImage = styled.img`
   width: 30px;
@@ -57,17 +115,26 @@ export const NavLinkItem = styled.li`
   justify-content: flex-start;
   align-items: center;
   width: 100%;
-  padding: 10px;
+  padding: 13px;
   border-radius: 5px;
-  background-color: ${props =>
-    props.highlight === true ? '#f1f5f9' : 'transparent'};
+  background-color: ${props => {
+    if (props.highlight && props.isDark) {
+      return '#383838'
+    }
+    if (props.highlight && !props.isDark) {
+      return '#e2e8f0'
+    }
+    return 'transparent'
+  }};
 `
 
 export const NavLink = styled(Link)`
   font-weight: ${props => (props.highlight === true ? '700' : '500')};
   text-decoration: none;
   font-size: 15px;
+  display: flex;
+  align-items: center;
   width: 100%;
-  color: black;
+  color: ${props => (props.isDark === true ? '#d7dfe9' : 'black')};
   margin-left: 8px;
 `
