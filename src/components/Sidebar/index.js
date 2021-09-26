@@ -1,4 +1,5 @@
 import {Component} from 'react'
+import {withRouter} from 'react-router-dom'
 import NxtWatchContext from '../../context/nxtWatchContext'
 
 import {
@@ -18,99 +19,93 @@ import {
 } from './styledComponents'
 
 class SideBar extends Component {
-  state = {
-    selectedLink: 'home',
-  }
-
-  onHomeSelect = () => {
-    this.setState({selectedLink: 'home'})
-  }
-
-  onTrendingSelect = () => {
-    this.setState({selectedLink: 'trending'})
-  }
-
-  onGamingSelect = () => {
-    this.setState({selectedLink: 'gaming'})
-  }
-
-  onSavedSelect = () => {
-    this.setState({selectedLink: 'saved'})
-  }
-
   render() {
     return (
       <NxtWatchContext.Consumer>
         {value => {
-          const {selectedLink} = this.state
+          const onHomeSelect = () => {
+            value.changeSelectedRoute('home')
+          }
+
+          const onTrendingSelect = () => {
+            value.changeSelectedRoute('trending')
+          }
+
+          const onGamingSelect = () => {
+            value.changeSelectedRoute('gaming')
+          }
+
+          const onSavedSelect = () => {
+            value.changeSelectedRoute('saved')
+          }
           return (
             <SideBarOuterCont isDark={value.isDarkTheme}>
               <NavLinksList>
                 <NavLinkItem
-                  highlight={selectedLink === 'home'}
-                  onClick={this.onHomeSelect}
+                  highlight={value.selectedRoute === 'home'}
+                  onClick={onHomeSelect}
                   isDark={value.isDarkTheme}
                 >
                   <NavLink
                     isDark={value.isDarkTheme}
-                    highlight={selectedLink === 'home'}
+                    highlight={value.selectedRoute === 'home'}
                     to="/"
                   >
                     <HomeIcon
                       isDark={value.isDarkTheme}
-                      highlight={selectedLink === 'home'}
+                      highlight={value.selectedRoute === 'home'}
                     />
                     Home
                   </NavLink>
                 </NavLinkItem>
 
                 <NavLinkItem
-                  highlight={selectedLink === 'trending'}
-                  onClick={this.onTrendingSelect}
+                  highlight={value.selectedRoute === 'trending'}
+                  onClick={onTrendingSelect}
                   isDark={value.isDarkTheme}
                 >
                   <NavLink
                     isDark={value.isDarkTheme}
-                    highlight={selectedLink === 'trending'}
-                    to="/"
+                    highlight={value.selectedRoute === 'trending'}
+                    to="/trending"
                   >
                     <TrendingIcon
                       isDark={value.isDarkTheme}
-                      highlight={selectedLink === 'trending'}
+                      highlight={value.selectedRoute === 'trending'}
                     />
                     Trending
                   </NavLink>
                 </NavLinkItem>
                 <NavLinkItem
-                  highlight={selectedLink === 'gaming'}
-                  onClick={this.onGamingSelect}
+                  highlight={value.selectedRoute === 'gaming'}
+                  onClick={onGamingSelect}
                   isDark={value.isDarkTheme}
                 >
                   <NavLink
                     isDark={value.isDarkTheme}
-                    highlight={selectedLink === 'gaming'}
+                    highlight={value.selectedRoute === 'gaming'}
                     to="/"
                   >
                     <GamingIcon
                       isDark={value.isDarkTheme}
-                      highlight={selectedLink === 'gaming'}
+                      highlight={value.selectedRoute === 'gaming'}
                     />
                     Gaming
                   </NavLink>
                 </NavLinkItem>
                 <NavLinkItem
-                  highlight={selectedLink === 'saved'}
-                  onClick={this.onSavedSelect}
+                  highlight={value.selectedRoute === 'saved'}
+                  onClick={onSavedSelect}
                   isDark={value.isDarkTheme}
                 >
                   <NavLink
                     isDark={value.isDarkTheme}
-                    highlight={selectedLink === 'saved'}
+                    highlight={value.selectedRoute === 'saved'}
                     to="/"
                   >
                     <SavedIcon
                       isDark={value.isDarkTheme}
-                      highlight={selectedLink === 'saved'}
+                      highlight={value.selectedRoute === 'saved'}
                     />
                     Saved Videos
                   </NavLink>
@@ -145,4 +140,4 @@ class SideBar extends Component {
   }
 }
 
-export default SideBar
+export default withRouter(SideBar)

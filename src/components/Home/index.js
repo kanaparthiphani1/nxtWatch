@@ -130,7 +130,7 @@ class Home extends Component {
   }
 
   render() {
-    const {bannerDisplay, searchText, videosList, apiStatus} = this.state
+    const {bannerDisplay, searchText} = this.state
     return (
       <NxtWatchContext.Consumer>
         {value => {

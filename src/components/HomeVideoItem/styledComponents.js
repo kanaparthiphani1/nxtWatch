@@ -1,12 +1,19 @@
 import styled from 'styled-components'
+import {Link} from 'react-router-dom'
 
-export const VideoItemCont = styled.div`
+export const VideoItemCont = styled(Link)`
   display: flex;
   flex-direction: column;
-  width: 31%;
+  width: 29%;
   height: 360px;
   background-color: transparent;
   margin: 10px;
+  text-decoration: none;
+  transition: 0.3s all ease-out;
+
+  &:hover {
+    background-color: ${props => (props.isDark ? '#212529' : '#E9ECEF')};
+  }
 `
 export const Thumbnail = styled.img`
   width: 100%;

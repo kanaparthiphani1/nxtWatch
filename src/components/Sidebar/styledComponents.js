@@ -115,7 +115,7 @@ export const NavLinkItem = styled.li`
   justify-content: flex-start;
   align-items: center;
   width: 100%;
-  padding: 13px;
+
   border-radius: 5px;
   background-color: ${props => {
     if (props.highlight && props.isDark) {
@@ -137,4 +137,5 @@ export const NavLink = styled(Link)`
   width: 100%;
   color: ${props => (props.isDark === true ? '#d7dfe9' : 'black')};
   margin-left: 8px;
+  padding: 13px;
 `

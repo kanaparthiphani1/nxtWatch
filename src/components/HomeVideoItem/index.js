@@ -23,7 +23,7 @@ class HomeVideoItem extends Component {
       <NxtWatchContext.Consumer>
         {value => {
           const ele = (
-            <VideoItemCont>
+            <VideoItemCont isDark={value.isDarkTheme} to={`/video/${item.id}`}>
               <Thumbnail src={item.thumbnailUrl} alt="thumnail" />
               <VideoItemLowerCont>
                 <ItemLeftCont>
