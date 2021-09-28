@@ -5,6 +5,12 @@ const NxtWatchContext = React.createContext({
   toggleDark: () => {},
   selectedRoute: '',
   changeSelectedRoute: () => {},
+  likedVideos: [],
+  dislikedVideos: [],
+  savedVideos: [],
+  updateLikedVideos: id => {},
+  updateDislikedVideos: id => {},
+  updateSavedVideos: id => {},
 })
 
 export default NxtWatchContext

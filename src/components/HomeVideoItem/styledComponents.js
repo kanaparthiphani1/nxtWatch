@@ -8,6 +8,7 @@ export const VideoItemCont = styled(Link)`
   height: 360px;
   background-color: transparent;
   margin: 10px;
+  margin-right: 40px;
   text-decoration: none;
   transition: 0.3s all ease-out;
 

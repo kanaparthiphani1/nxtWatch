@@ -7,11 +7,16 @@ import ProtectedRoute from './ProtectedRoute'
 import Trending from './components/Trending'
 import NxtWatchContext from './context/nxtWatchContext'
 import VideoItemDetail from './components/VideoItemDetail'
+import Gaming from './components/Gaming'
+import Saved from './components/Saved'
 
 class App extends Component {
   state = {
     isDarkTheme: false,
     selectedRoute: 'home',
+    likedVideos: ['30b642bd-7591-49f4-ac30-5c538f975b15'],
+    dislikedVideos: [],
+    savedVideos: [],
   }
 
   componentDidMount() {
@@ -37,8 +42,86 @@ class App extends Component {
     this.setState({selectedRoute: route})
   }
 
+  updateLikedVideos = id => {
+    console.log('LIKED')
+
+    this.setState(prevState => {
+      if (prevState.dislikedVideos.includes(id)) {
+        const prevDisliked = prevState.dislikedVideos
+        prevDisliked.splice(prevState.dislikedVideos.indexOf(id), 1)
+        return {
+          dislikedVideos: prevDisliked,
+        }
+      }
+      return {...prevState}
+    })
+
+    const {likedVideos} = this.state
+
+    this.setState(prevState => {
+      if (prevState.likedVideos.includes(id)) {
+        const prevLiked = prevState.likedVideos
+        prevLiked.splice(prevLiked.indexOf(id), 1)
+        return {
+          likedVideos: prevLiked,
+        }
+      }
+      return {likedVideos: [...prevState.likedVideos, id]}
+    })
+  }
+
+  updateDislikedVideos = id => {
+    this.setState(prevState => {
+      if (prevState.likedVideos.includes(id)) {
+        const prevLiked = prevState.likedVideos
+        prevLiked.splice(prevLiked.indexOf(id), 1)
+        return {
+          likedVideos: prevLiked,
+        }
+      }
+      return {...prevState}
+    })
+
+    console.log({...this.state})
+
+    this.setState(prevState => {
+      if (prevState.dislikedVideos.includes(id)) {
+        const prevDisliked = prevState.dislikedVideos
+        prevDisliked.splice(prevState.dislikedVideos.indexOf(id), 1)
+        return {
+          dislikedVideos: prevDisliked,
+        }
+      }
+      return {dislikedVideos: [...prevState.dislikedVideos, id]}
+    })
+  }
+
+  updateSavedVideos = video => {
+    console.log(video)
+    this.setState(prevState => {
+      const savedFilter = prevState.savedVideos.filter(
+        eachdata => eachdata.id === video.id,
+      )
+
+      if (savedFilter.length > 0) {
+        return {
+          savedVideos: prevState.savedVideos.filter(
+            eachdata => eachdata.id !== video.id,
+          ),
+        }
+      }
+      return {savedVideos: [...prevState.savedVideos, video]}
+    })
+  }
+
   render() {
-    const {isDarkTheme, selectedRoute} = this.state
+    const {
+      isDarkTheme,
+      selectedRoute,
+      likedVideos,
+      dislikedVideos,
+      savedVideos,
+    } = this.state
     return (
       <NxtWatchContext.Provider
         value={{
@@ -46,6 +129,12 @@ class App extends Component {
           toggleDark: this.toggleDark,
           selectedRoute,
           changeSelectedRoute: this.changeSelectedRoute,
+          likedVideos,
+          dislikedVideos,
+          savedVideos,
+          updateLikedVideos: this.updateLikedVideos,
+          updateDislikedVideos: this.updateDislikedVideos,
+          updateSavedVideos: this.updateSavedVideos,
         }}
       >
         <Switch>
@@ -53,6 +142,8 @@ class App extends Component {
           <ProtectedRoute exact path="/" component={Home} />
           <ProtectedRoute exact path="/trending" component={Trending} />
           <ProtectedRoute exact path="/video/:id" component={VideoItemDetail} />
+          <ProtectedRoute exact path="/gaming" component={Gaming} />
+          <ProtectedRoute exact path="/saved" component={Saved} />
         </Switch>
       </NxtWatchContext.Provider>
     )

@@ -99,13 +99,18 @@ export const LikeCont = styled.div`
   justify-content: center;
   align-items: center;
   margin-right: 20px;
-  color: #94a3b8;
+
   font-size: 15px;
   font-weight: 600;
+  color: ${props => (props.liked ? ' #3b82f6' : '#94a3b8')};
 `
-export const DislikeCont = styled(LikeCont)``
+export const DislikeCont = styled(LikeCont)`
+  color: ${props => (props.disliked ? ' #3b82f6' : '#94a3b8')};
+`
 
-export const SaveCont = styled(LikeCont)``
+export const SaveCont = styled(LikeCont)`
+  color: ${props => (props.saved ? ' #3b82f6' : '#94a3b8')};
+`
 
 export const ActionText = styled.p``
 

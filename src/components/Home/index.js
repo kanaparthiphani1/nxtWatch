@@ -21,6 +21,13 @@ import {
   VideosContainer,
   VideosInnerContainer,
   LoaderContainer,
+  NotFoundContainer,
+  Heading,
+  Desc,
+  NavLink,
+  Retry,
+  Image,
+  MainContainer,
 } from './styledComponents'
 import Header from '../Header'
 import SideBar from '../Sidebar'
@@ -101,9 +108,27 @@ class Home extends Component {
     this.setState({bannerDisplay: false})
   }
 
-  renderJobsListView = () => {
-    const {videosList} = this.state
-    return <HomeVideoList homeVideosList={videosList} />
+  renderJobsListView = value => {
+    const {videosList, bannerDisplay} = this.state
+    if (videosList.length > 0) {
+      return <HomeVideoList homeVideosList={videosList} />
+    }
+    return (
+      <MainContainer bannerPresent={bannerDisplay}>
+        <Image
+          src="https://assets.ccbp.in/frontend/react-js/nxt-watch-no-search-results-img.png"
+          alt="no videos"
+        />
+        <Heading isDark={value.isDarkTheme}>No Search results found</Heading>
+        <Desc isDark={value.isDarkTheme}>
+          Try different keywords or remove search.
+        </Desc>
+
+        <Retry type="button" onClick={this.getVideosList}>
+          Retry
+        </Retry>
+      </MainContainer>
+    )
   }
 
   renderLoadingView = () => {
@@ -115,13 +140,31 @@ class Home extends Component {
     )
   }
 
-  showVideosInnerCont = () => {
+  renderFailureView = value => (
+    <NotFoundContainer isDark={value.isDarkTheme}>
+      <Image
+        src="https://assets.ccbp.in/frontend/react-js/nxt-watch-failure-view-light-theme-img.png"
+        alt="failure view"
+      />
+      <Heading isDark={value.isDarkTheme}>Oops! Something Went Wrong</Heading>
+      <Desc isDark={value.isDarkTheme}>
+        We are having some trouble to complete your request.Please try again.
+      </Desc>
+      <NavLink>
+        <Retry type="button" onClick={this.getVideos}>
+          Retry
+        </Retry>
+      </NavLink>
+    </NotFoundContainer>
+  )
+
+  showVideosInnerCont = value => {
     const {apiStatus} = this.state
     switch (apiStatus) {
       case apiStatusConstants.success:
-        return this.renderJobsListView()
+        return this.renderJobsListView(value)
       case apiStatusConstants.failure:
-        return this.renderJobsListView()
+        return this.renderFailureView(value)
       case apiStatusConstants.inProgress:
         return this.renderLoadingView()
       default:
@@ -173,7 +216,7 @@ class Home extends Component {
                       </SearchIconContainer>
                     </SearchBarContainer>
                     <VideosInnerContainer>
-                      {this.showVideosInnerCont()}
+                      {this.showVideosInnerCont(value)}
                     </VideosInnerContainer>
                   </VideosContainer>
                 </HomeContentContainer>

@@ -114,6 +114,26 @@ class VideoItemDetail extends Component {
 
   renderVideoDetail = value => {
     const {video} = this.state
+
+    const onLike = () => {
+      value.updateLikedVideos(video.id)
+    }
+
+    const onDisLiked = () => {
+      value.updateDislikedVideos(video.id)
+    }
+
+    const onSaved = () => {
+      value.updateSavedVideos(video)
+    }
+
+    const isSaved = videoObj => {
+      const saved = value.savedVideos.filter(
+        eachData => eachData.id === video.id,
+      )
+      return saved.length > 0
+    }
+
     if (video !== null) {
       const ele = (
         <VideoPlayerCont>
@@ -126,17 +146,23 @@ class VideoItemDetail extends Component {
                 <PublishedAt>{video.publishedAt}</PublishedAt>
               </ViewsAndAt>
               <ActionInnerCont>
-                <LikeCont>
-                  <LikeIcon />
-                  <ActionText>Like</ActionText>
+                <LikeCont
+                  onClick={onLike}
+                  liked={value.likedVideos.includes(video.id)}
+                >
+                  <LikeIcon id="like" />
+                  <ActionText htmlFor="like">Like</ActionText>
                 </LikeCont>
-                <DislikeCont>
+                <DislikeCont
+                  onClick={onDisLiked}
+                  disliked={value.dislikedVideos.includes(video.id)}
+                >
                   <DislikeIcon />
                   <ActionText>Dislike</ActionText>
                 </DislikeCont>
-                <SaveCont>
+                <SaveCont onClick={onSaved} saved={isSaved(video)}>
                   <SaveIcon />
-                  <ActionText>Save</ActionText>
+                  <ActionText>Save{isSaved(video) && 'd'}</ActionText>
                 </SaveCont>
               </ActionInnerCont>
             </ActionsCont>

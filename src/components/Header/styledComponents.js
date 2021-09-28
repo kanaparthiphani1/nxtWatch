@@ -1,4 +1,10 @@
 import styled from 'styled-components'
+import Popup from 'reactjs-popup'
+
+export const PopupCont = styled(Popup)`
+  width: 200px !important;
+  height: 240px;
+`
 
 export const HeaderContainer = styled.div`
   width: 100vw;

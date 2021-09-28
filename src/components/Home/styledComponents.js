@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import {MdClose, MdSearch} from 'react-icons/md'
+import {Link} from 'react-router-dom'
 
 export const CloseButton = styled(MdClose)`
   margin-top: 15px;
@@ -114,4 +115,61 @@ export const LoaderContainer = styled.div`
   align-items: center;
   width: 100%;
   min-height: ${props => (props.bannerDisplay ? '50vh' : '80vh')};
+`
+
+export const NotFoundContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100vh;
+  align-items: center;
+  background-color: transparent;
+`
+export const MainContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  background-color: ${props => props.bgColor};
+  width: 100%;
+  min-height: ${props => (props.bannerPresent ? '50vh' : '80vh')};
+  justify-content: center;
+  align-items: center;
+`
+
+export const Heading = styled.h1`
+  color: black;
+  text-align: center;
+  font-size: 30px;
+  color: ${props => (props.isDark ? 'white' : 'black')};
+  margin-top: 20px;
+`
+
+export const Image = styled.img`
+  width: 40%;
+  margin: 20px;
+`
+
+export const Desc = styled.p`
+  color: black;
+  text-align: center;
+  font-size: 20px;
+  color: ${props => (props.isDark ? '#cbd5e1' : 'grey')};
+  margin-top: 20px;
+`
+export const NavLink = styled(Link)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #1e293b;
+  text-decoration: none;
+  margin-bottom: 32px;
+`
+export const Retry = styled.button`
+  padding: 13px 26px;
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+  margin-top: 20px;
+  background-color: #4f46e5;
+  border: 0px;
+  border-radius: 5px;
 `

@@ -84,7 +84,7 @@ class SideBar extends Component {
                   <NavLink
                     isDark={value.isDarkTheme}
                     highlight={value.selectedRoute === 'gaming'}
-                    to="/"
+                    to="/gaming"
                   >
                     <GamingIcon
                       isDark={value.isDarkTheme}
@@ -101,7 +101,7 @@ class SideBar extends Component {
                   <NavLink
                     isDark={value.isDarkTheme}
                     highlight={value.selectedRoute === 'saved'}
-                    to="/"
+                    to="/saved"
                   >
                     <SavedIcon
                       isDark={value.isDarkTheme}
