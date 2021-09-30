@@ -19,6 +19,14 @@ import {
 
 import Header from '../Header'
 import SideBar from '../Sidebar'
+import {
+  NotFoundContainer,
+  Heading,
+  Desc,
+  NavLink,
+  Retry,
+} from '../Home/styledComponents'
+import {Image} from '../Login/styledComponents'
 
 const apiStatusConstants = {
   initial: 'INITIAL',
@@ -95,13 +103,31 @@ class Trending extends Component {
     )
   }
 
-  showVideosInnerCont = () => {
+  renderFailureView = value => (
+    <NotFoundContainer>
+      <Image
+        src="https://assets.ccbp.in/frontend/react-js/nxt-watch-failure-view-light-theme-img.png"
+        alt="failure view"
+      />
+      ]<Heading isDark={value.isDarkTheme}>Oops! Something Went Wrong</Heading>
+      <Desc>
+        We are having some trouble to complete your request.Please try again.
+      </Desc>
+      <NavLink>
+        <Retry type="button" onClick={this.getTrendingVideosList}>
+          Retry
+        </Retry>
+      </NavLink>
+    </NotFoundContainer>
+  )
+
+  showVideosInnerCont = value => {
     const {apiStatus} = this.state
     switch (apiStatus) {
       case apiStatusConstants.success:
         return this.renderTrendingView()
       case apiStatusConstants.failure:
-        return this.renderTrendingView()
+        return this.renderFailureView(value)
       case apiStatusConstants.inProgress:
         return this.renderLoadingView()
       default:
@@ -130,7 +156,7 @@ class Trending extends Component {
                     </TrendingHead>
                   </TrendingHeaderCont>
 
-                  {this.showVideosInnerCont()}
+                  {this.showVideosInnerCont(value)}
                 </HomeContentContainer>
               </HomeInnerContainer>
             </HomeContainer>

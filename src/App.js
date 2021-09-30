@@ -1,4 +1,4 @@
-import {Route, Switch, withRouter} from 'react-router-dom'
+import {Route, Switch, withRouter, Redirect} from 'react-router-dom'
 import {Component} from 'react'
 import './App.css'
 import Login from './components/Login'
@@ -9,12 +9,13 @@ import NxtWatchContext from './context/nxtWatchContext'
 import VideoItemDetail from './components/VideoItemDetail'
 import Gaming from './components/Gaming'
 import Saved from './components/Saved'
+import NotFound from './components/NotFound'
 
 class App extends Component {
   state = {
     isDarkTheme: false,
     selectedRoute: 'home',
-    likedVideos: ['30b642bd-7591-49f4-ac30-5c538f975b15'],
+    likedVideos: [],
     dislikedVideos: [],
     savedVideos: [],
   }
@@ -55,8 +56,6 @@ class App extends Component {
       }
       return {...prevState}
     })
-
-    const {likedVideos} = this.state
 
     this.setState(prevState => {
       if (prevState.likedVideos.includes(id)) {
@@ -144,6 +143,8 @@ class App extends Component {
           <ProtectedRoute exact path="/video/:id" component={VideoItemDetail} />
           <ProtectedRoute exact path="/gaming" component={Gaming} />
           <ProtectedRoute exact path="/saved" component={Saved} />
+          <Route path="/not-found" component={NotFound} />
+          <Redirect to="not-found" />
         </Switch>
       </NxtWatchContext.Provider>
     )

@@ -15,6 +15,9 @@ export const SideBarConatiner = styled.div`
   width: 20%;
 
   min-height: 91vh;
+  @media screen and (max-width: 767px) {
+    display: none;
+  }
 `
 
 export const HomeInnerContainer = styled.div`
@@ -30,6 +33,9 @@ export const HomeContentContainer = styled.div`
 
   &::-webkit-scrollbar {
     width: 0px;
+  }
+  @media screen and (max-width: 767px) {
+    width: 100vw;
   }
 `
 export const LoaderContainer = styled.div`
@@ -61,16 +67,28 @@ export const IconCont = styled.div`
   align-items: center;
   border-radius: 50%;
   margin-right: 30px;
+  @media screen and (max-width: 767px) {
+    padding: 15px;
+    width: 50px;
+    height: 50px;
+    margin-right: 15px;
+  }
 `
 
 export const TrendingIcon = styled(FaFire)`
   font-size: 40px;
   color: red;
+  @media screen and (max-width: 767px) {
+    font-size: 25px;
+  }
 `
 export const TrendingHead = styled.h1`
   font-weight: 700;
   font-size: 40px;
   color: ${props => (props.isDark ? 'white' : 'black')};
+  @media screen and (max-width: 767px) {
+    font-size: 25px;
+  }
 `
 export const TrendingVideosCont = styled.div`
   padding: 40px;

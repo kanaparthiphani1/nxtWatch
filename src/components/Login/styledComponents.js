@@ -6,6 +6,10 @@ export const LoginOuterContainer = styled.div`
   justify-content: center;
   align-items: center;
   background-color: ${props => (props.isDark ? '#212121' : 'transparent')};
+
+  @media screen and (max-width: 767px) {
+    padding: 20px;
+  }
 `
 
 export const LoginContainer = styled.div`

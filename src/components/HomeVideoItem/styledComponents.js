@@ -4,16 +4,20 @@ import {Link} from 'react-router-dom'
 export const VideoItemCont = styled(Link)`
   display: flex;
   flex-direction: column;
-  width: 29%;
+  width: 33%;
   height: 360px;
   background-color: transparent;
-  margin: 10px;
-  margin-right: 40px;
+  padding: 20px;
+  margin-bottom: 10px;
   text-decoration: none;
   transition: 0.3s all ease-out;
 
   &:hover {
     background-color: ${props => (props.isDark ? '#212529' : '#E9ECEF')};
+  }
+  @media screen and (max-width: 767px) {
+    width: 100%;
+    padding: 9px;
   }
 `
 export const Thumbnail = styled.img`

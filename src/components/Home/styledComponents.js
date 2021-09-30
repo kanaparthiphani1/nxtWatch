@@ -15,6 +15,9 @@ export const SideBarConatiner = styled.div`
   width: 20%;
 
   min-height: 91vh;
+  @media screen and (max-width: 767px) {
+    display: none;
+  }
 `
 
 export const HomeInnerContainer = styled.div`
@@ -31,6 +34,10 @@ export const HomeContentContainer = styled.div`
   &::-webkit-scrollbar {
     width: 0px;
   }
+
+  @media screen and (max-width: 767px) {
+    width: 100%;
+  }
 `
 export const Banner = styled.div`
   background-image: url('https://assets.ccbp.in/frontend/react-js/nxt-watch-banner-bg.png');
@@ -39,6 +46,10 @@ export const Banner = styled.div`
   background-size: cover;
   display: flex;
   justify-content: space-between;
+  @media screen and (max-width: 767px) {
+    width: 100%;
+    height: 150px;
+  }
 `
 export const BannerContent = styled.div`
   height: 260px;
@@ -47,11 +58,23 @@ export const BannerContent = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  @media screen and (max-width: 767px) {
+    height: 150px;
+    width: 40%;
+    padding: 20px;
+  }
 `
 export const Logo = styled.img`
   width: 150px;
+  @media screen and (max-width: 767px) {
+    width: 85px;
+  }
 `
-export const BannerHeading = styled.p``
+export const BannerHeading = styled.p`
+  @media screen and (max-width: 767px) {
+    font-size: 9px;
+  }
+`
 
 export const GetItNowButton = styled.button`
   padding: 10px;
@@ -60,6 +83,10 @@ export const GetItNowButton = styled.button`
   border-radius: 3px;
   align-self: flex-start;
   cursor: pointer;
+  @media screen and (max-width: 767px) {
+    padding: 5px;
+    font-size: 10px;
+  }
 `
 export const VideosContainer = styled.div`
   display: flex;
@@ -76,6 +103,9 @@ export const SearchBarContainer = styled.form`
   border-color: ${props => (props.isDark ? '#333d49' : '#d6d7d3')};
   outline-width: 0;
   border-radius: 4px;
+  @media screen and (max-width: 767px) {
+    width: 100%;
+  }
 `
 export const SearchInput = styled.input`
   width: 87%;

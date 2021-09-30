@@ -11,6 +11,4 @@ export const NavLinksList = styled.ul`
   padding-inline-start: 0;
   flex-wrap: wrap;
   list-style-type: none;
-  margin-left: 15px;
-  width: 80vw;
 `

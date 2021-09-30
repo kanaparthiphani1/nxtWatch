@@ -65,6 +65,12 @@ export const SideBarOuterCont = styled.div`
   min-height: 91vh;
   padding-top: 15px;
   background-color: ${props => (props.isDark ? '#23231d' : 'white')};
+  @media screen and (max-width: 767px) {
+    min-height: 95vh;
+    width: 100vw;
+    padding: 5px;
+    justify-content: center;
+  }
 `
 
 export const SocialContainer = styled.div`
@@ -72,6 +78,9 @@ export const SocialContainer = styled.div`
   flex-direction: column;
   margin-top: auto;
   padding: 17px;
+  @media screen and (max-width: 767px) {
+    display: none;
+  }
 `
 export const ImageContainer = styled.div`
   display: flex;
@@ -126,6 +135,10 @@ export const NavLinkItem = styled.li`
     }
     return 'transparent'
   }};
+
+  @media screen and (max-width: 767px) {
+    justify-content: center;
+  }
 `
 
 export const NavLink = styled(Link)`
@@ -138,4 +151,7 @@ export const NavLink = styled(Link)`
   color: ${props => (props.isDark === true ? '#d7dfe9' : 'black')};
   margin-left: 8px;
   padding: 13px;
+  @media screen and (max-width: 767px) {
+    justify-content: center;
+  }
 `

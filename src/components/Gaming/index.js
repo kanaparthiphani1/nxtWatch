@@ -5,6 +5,12 @@ import {
   HomeContainer,
   HomeInnerContainer,
   SideBarConatiner,
+  NotFoundContainer,
+  Image,
+  Heading,
+  Desc,
+  NavLink,
+  Retry,
 } from '../Home/styledComponents'
 import {
   HomeContentContainer,
@@ -86,6 +92,26 @@ class Gaming extends Component {
     <LoaderContainer className="products-loader-container" data-testid="loader">
       <Loader type="ThreeDots" color="#0b69ff" height="50" width="50" />
     </LoaderContainer>
+  )
+
+  renderFailureView = () => (
+    <NotFoundContainer>
+      <Image
+        src="https://assets.ccbp.in/frontend/react-js/nxt-watch-failure-view-light-theme-img.png"
+        alt="failure view"
+      />
+      <Heading className="jobs-failure-heading-text">
+        Oops! Something Went Wrong
+      </Heading>
+      <Desc className="jobs-failure-description">
+        We are having some trouble to complete your request.Please try again.
+      </Desc>
+      <NavLink>
+        <Retry onClick={this.getVideos} type="button">
+          Retry
+        </Retry>
+      </NavLink>
+    </NotFoundContainer>
   )
 
   renderAllProducts = () => {
